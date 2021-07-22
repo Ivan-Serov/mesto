@@ -2,6 +2,10 @@
     width: 104px;
     height: 25px;
 }
+.header__logo:hover {
+    background: #000000;
+    opacity: 0;
+}
 @media screen and ( min-width: 1280px ){
     .header__logo{
         width: 142px;

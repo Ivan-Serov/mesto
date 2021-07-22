@@ -9,3 +9,10 @@
     align-self: flex-end;
     margin: 0px 20px 5px 0px;
 }
+.places__like:hover{
+    opacity: 0.5;
+}
+.places__like:active{
+    background: #000000;
+    overflow: hidden;
+}

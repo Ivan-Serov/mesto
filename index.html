@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="pages/index.css">
-  <title>Mesto</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="pages/index.css">
+    <title>Mesto</title>
 </head>
 <body class="page">
     <header class="header">
@@ -16,7 +16,7 @@
             <div class="profile__text-group">
                 <div class="profile__title-box">
                     <h1 class="profile__title">Жак-Ив Кусто</h1>
-                    <button class="profile__edit"></button>
+                    <button type="button" class="profile__edit"></button>
                 </div>
                 <p class="profile__subtitle">Исследователь океана</p>
             </div>
@@ -25,7 +25,7 @@
         <section class="places">
             <div class="places__card">
                 <img src="images/karachaevsk-kar_cher.png" alt="" class="places__image">
-                <h2 class="places__title">Карачаево-Ч...</h2>
+                <h2 class="places__title">Карачаево-Черкесия</h2>
                 <button class="places__like"></button>
             </div>
             <div class="places__card">
@@ -50,7 +50,7 @@
             </div>
             <div class="places__card">
                 <img src="images/karachaevsk-kar_cher.png" alt="" class="places__image">
-                <h2 class="places__title">Карачаево-Ч...</h2>
+                <h2 class="places__title">Карачаево-Черкесия</h2>
                 <button class="places__like"></button>
             </div>
         </section>
@@ -59,5 +59,21 @@
     <footer class="footer">
         <p class="footer__author">&copy; 2021. Иван Серов</p>
     </footer>
+    <section class="popup">
+        <div class="popup__container">
+            <button type="button" class="popup__close"></button>
+            <form class="popup__content">
+                <h2 class="popup__title">Редактировать профиль</h2>
+                <input type="text" placeholder="Имя" class="popup__text popup__text_type_user">
+                <input type="text" placeholder="О себе" class="popup__text popup__text_type_user-information">
+                <button class="popup__save">Сохранить</button>
+            </form>
+            
+        </div>
+    
+    </section>
+    <script src="scripts/script.js"></script>
 </body>
+
+
 </html>

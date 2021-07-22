@@ -8,6 +8,9 @@
     background-color: #000000;
     margin-top: 33px;
 }
+.profile__add:hover{
+    opacity: 0.6;
+}
 @media screen and ( min-width: 1280px ){
     .profile__add{
         margin-top: 35px;
