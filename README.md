@@ -11,4 +11,4 @@
 
 в разработке использовался только  Flex (grid-layot нет)
 
-ссылка на сафйт https://ivan-serov.github.io/russian-travel/
+ссылка на сафйт https://ivan-serov.github.io/mesto/
