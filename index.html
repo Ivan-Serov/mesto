@@ -8,7 +8,7 @@
 </head>
 <body class="page">
     <header class="header">
-        <img class="header__logo" src="./images/logo.png" alt="Россия">
+        <div class="header__logo"></div>
     </header>
     <main>
         <section class="profile">
@@ -20,38 +20,38 @@
                 </div>
                 <p class="profile__subtitle">Исследователь океана</p>
             </div>
-            <button class="profile__add"></button>
+            <button type="button" class="profile__add"></button>
         </section>
         <section class="places">
             <div class="places__card">
-                <img src="images/karachaevsk-kar_cher.png" alt="" class="places__image">
+                <img src="images/karachaevsk-kar_cher.png" alt="Карачаево-Черкесия" class="places__image">
                 <h2 class="places__title">Карачаево-Черкесия</h2>
-                <button class="places__like"></button>
+                <button type="button" class="places__like"></button>
             </div>
             <div class="places__card">
-                <img src="images/elbrus.png" alt="" class="places__image">
+                <img src="images/elbrus.png" alt="Гора Эльбрус" class="places__image">
                 <h2 class="places__title">Гора Эльбрус</h2>
-                <button class="places__like"></button>
+                <button type="button" class="places__like"></button>
             </div>
             <div class="places__card">
-                <img src="images/dombai.png" alt="" class="places__image">
+                <img src="images/dombai.png" alt="Домбай" class="places__image">
                 <h2 class="places__title">Домбай</h2>
-                <button class="places__like"></button>
+                <button type="button" class="places__like"></button>
             </div>
             <div class="places__card">
-                <img src="images/elbrus.png" alt="" class="places__image">
+                <img src="images/elbrus.png" alt="Гора Эльбрус" class="places__image">
                 <h2 class="places__title">Гора Эльбрус</h2>
-                <button class="places__like"></button>
+                <button type="button" class="places__like"></button>
             </div>
             <div class="places__card">
-                <img src="images/dombai.png" alt="" class="places__image">
+                <img src="images/dombai.png" alt="Домбай" class="places__image">
                 <h2 class="places__title">Домбай</h2>
-                <button class="places__like"></button>
+                <button type="button" class="places__like"></button>
             </div>
             <div class="places__card">
-                <img src="images/karachaevsk-kar_cher.png" alt="" class="places__image">
+                <img src="images/karachaevsk-kar_cher.png" alt="Карачаево-Черкесия" class="places__image">
                 <h2 class="places__title">Карачаево-Черкесия</h2>
-                <button class="places__like"></button>
+                <button type="button" class="places__like"></button>
             </div>
         </section>
         
@@ -59,19 +59,19 @@
     <footer class="footer">
         <p class="footer__author">&copy; 2021. Иван Серов</p>
     </footer>
-    <section class="popup">
+    <div class="popup" name="editing">
         <div class="popup__container">
             <button type="button" class="popup__close"></button>
-            <form class="popup__content">
+            <form class="popup__content" method="POST">
                 <h2 class="popup__title">Редактировать профиль</h2>
-                <input type="text" placeholder="Имя" class="popup__text popup__text_type_user">
-                <input type="text" placeholder="О себе" class="popup__text popup__text_type_user-information">
-                <button class="popup__save">Сохранить</button>
+                <input name="user" type="text" placeholder="Имя" class="popup__text popup__text_type_user">
+                <input name="user-information" type="text" placeholder="О себе" class="popup__text popup__text_type_user-information">
+                <button type="submit" class="popup__save">Сохранить</button>
             </form>
             
         </div>
     
-    </section>
+    </div>
     <script src="scripts/script.js"></script>
 </body>
 

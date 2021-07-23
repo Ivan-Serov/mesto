@@ -1,6 +1,8 @@
 .header__logo{
     width: 104px;
     height: 25px;
+    background-image: url(../../../images/Logo.svg);
+    background-size: contain;
 }
 .header__logo:hover {
     background: #000000;

@@ -2,23 +2,24 @@
     margin-bottom: 15px;
     border: 0;
     padding: 0;
-    background-image: url(../../../images/CloseIcon.png);
+    background-image: url(../../../images/CloseIconD.png);
     width: 20px;
     height: 20px;
-    background-color: #000000;
+    background-color: rgba(0, 0, 0, 0);
     align-self: flex-end;
+    background-size: cover;
 }
 .popup__close:hover{
-    opacity: 0.8;
+    opacity: 0.6;
+    cursor: pointer;
 }
 @media screen and ( min-width: 1280px ){
     .popup__close{
-        background-image: url(../../../images/CloseIconD.svg);
-        margin-bottom: 15px;
+        background-image: url(../../../images/CloseIconD.png);
         width: 32px;
         height: 32px;
         position: absolute;
-        top: 22px;
-        right: -42px;
+        top: -2px;
+        right: -40px;
     }
 }

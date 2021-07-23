@@ -11,8 +11,9 @@
 }
 .places__like:hover{
     opacity: 0.5;
+    cursor: pointer;
 }
 .places__like:active{
     background: #000000;
-    overflow: hidden;
+    
 }
