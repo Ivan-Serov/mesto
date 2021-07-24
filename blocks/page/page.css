@@ -12,13 +12,6 @@
 }
 @media screen and ( min-width: 1280px ){
     .page{
-        max-width: 880px;
-        display: flex;
-        flex-direction: column;
-        
-        
-        
-    }
-
-    
+        max-width: 880px; 
+    } 
 }
