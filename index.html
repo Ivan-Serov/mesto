@@ -23,37 +23,47 @@
             <button type="button" class="profile__add"></button>
         </section>
         <section class="places">
-            <div class="places__card">
-                <img src="images/karachaevsk-kar_cher.png" alt="Карачаево-Черкесия" class="places__image">
-                <h2 class="places__title">Карачаево-Черкесия</h2>
+            
+            <!-- <div class="places__card">
+                <img src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg" alt="Байкал" class="places__image">
+                <h2 class="places__title">Байкал</h2>
                 <button type="button" class="places__like"></button>
+                <button type="button" class="places__delete"></button>
             </div>
             <div class="places__card">
-                <img src="images/elbrus.png" alt="Гора Эльбрус" class="places__image">
-                <h2 class="places__title">Гора Эльбрус</h2>
+                <img src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg" alt="Холмогорский район" class="places__image">
+                <h2 class="places__title">Холмогорский район</h2>
                 <button type="button" class="places__like"></button>
+                <button type="button" class="places__delete"></button>
             </div>
             <div class="places__card">
-                <img src="images/dombai.png" alt="Домбай" class="places__image">
-                <h2 class="places__title">Домбай</h2>
+                <img src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg" alt="Камчатка" class="places__image">
+                <h2 class="places__title">Камчатка</h2>
                 <button type="button" class="places__like"></button>
+                <button type="button" class="places__delete"></button>
+                
             </div>
             <div class="places__card">
-                <img src="images/elbrus.png" alt="Гора Эльбрус" class="places__image">
-                <h2 class="places__title">Гора Эльбрус</h2>
+                <img src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg" alt="Иваново" class="places__image">
+                <h2 class="places__title">Иваново</h2>
                 <button type="button" class="places__like"></button>
+                <button type="button" class="places__delete"></button>
             </div>
             <div class="places__card">
-                <img src="images/dombai.png" alt="Домбай" class="places__image">
-                <h2 class="places__title">Домбай</h2>
+                <img src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg" alt="Челябинская область" class="places__image">
+                <h2 class="places__title">Челябинская область</h2>
                 <button type="button" class="places__like"></button>
+                <button type="button" class="places__delete"></button>
             </div>
             <div class="places__card">
-                <img src="images/karachaevsk-kar_cher.png" alt="Карачаево-Черкесия" class="places__image">
-                <h2 class="places__title">Карачаево-Черкесия</h2>
+                <img src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg" alt="Архыз" class="places__image">
+                <h2 class="places__title">Архыз</h2>
                 <button type="button" class="places__like"></button>
-            </div>
+                <button type="button" class="places__delete"></button>
+            </div> -->
+
         </section>
+            
         
     </main>
     <footer class="footer">
@@ -79,21 +89,33 @@
                 <h2 class="popup__title">Новое место</h2>
                 <input name="title-location" type="text" placeholder="Название" class="popup__text popup__text_type_title">
                 <input name="link-image" type="text" placeholder="Ссылка на картинку" class="popup__text popup__text_type_image-link">
-                <button type="submit" class="popup__save">Создать</button>
+                <button id="btn-add-save" type="submit" class="popup__save">Создать</button>
             </form>
             
         </div>
     
     </div>
+
+    <div class="popup popup_img" id="popup-image">
+        <div class="popup__container">
+            <button type="button" class="popup__close" id="popup-close-image"></button>
+            <img src="pop-img" alt="pop-img" class="popup__image">
+            <h2 class="popup__title popup__title_img"></h2>
+        </div>
+    
+    </div>
+
     <template id="places-card-template">
         <div class="places__card">
             <img src="images/karachaevsk-kar_cher.png" alt="Карачаево-Черкесия" class="places__image">
             <h2 class="places__title">Карачаево-Черкесия</h2>
             <button type="button" class="places__like"></button>
+            <button type="button" class="places__delete"></button>
         </div>
     </template>
+    <script src="scripts/scriptpop1.js"></script>
     <script src="scripts/script.js"></script>
 </body>
-
+ 
 
 </html>

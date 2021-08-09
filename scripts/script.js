@@ -1,28 +1,4 @@
-let popup = document.querySelector('.popup');
-let formElement = document.querySelector('.popup__content');// Воспользуйтесь методом querySelector()
-// Находим поля формы в DOM
-let nameInput = document.querySelector('.popup__text_type_user');// Воспользуйтесь инструментом .querySelector()
-let jobInput = document.querySelector('.popup__text_type_user-information');// Воспользуйтесь инструментом .querySelector()
 
-let editButton = document.querySelector('.profile__edit');
-let closeButton = document.querySelector('.popup__close');
-
-let profileTitle = document.querySelector('.profile__title');
-let profileSubtitle = document.querySelector('.profile__subtitle');
-////////////////////////////////////////////////////////////////////////////
-let popupAdd = document.getElementById('popup-add');
-let addButton = document.querySelector('.profile__add');
-let addCloseButton = document.getElementById('popup-close-add');
-
-let titleInput = document.getElementById('.popup__text_type_title');// Воспользуйтесь инструментом .querySelector()
-let imgInput = document.getElementById('.popup__text_type_image-link');// Воспользуйтесь инструментом .querySelector()
-
-let titleLoc = document.querySelector('.places__title');
-let imgLoc = document.querySelector('.places__image');
-
-let formAddEl = document.getElementById('formAddPlace');
-let templateEl= document.getElementById('places-card-template');
-////////////////////////////////////////////////////////////////////////////
 const initialCards = [
     {
       name: 'Архыз',
@@ -49,79 +25,87 @@ const initialCards = [
       link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
     }
   ];
-////////////////////////////////////////////////////////////////////////////
-function popAddOpen(){
-    popupAdd.classList.add('popup_opened');
+
+const placesCont = document.querySelector('.places');
+function openPopup(popup) {
+  popup.classList.add('popup_opened');
 }
-function popAddClose(){
-    popupAdd.classList.remove('popup_opened');
-}
-function addPlace(titleValue, img){
-    const mestoTemplate = document.querySelector('#places-card-template').content;
-    const cardElement = mestoTemplate.querySelector('.places__card').cloneNode(true);
-    cardElement.querySelector('places__image').
+function closePopup(popup) {
+  popup.classList.remove('popup_opened');
 }
 
- /* function addPlace(){
-    popAddOpen();
-    //////!111
-     titleInput.value = titleLoc.textContent;
-    imgInput.value = imgLoc.textContent; 
-    ////////1/111
-  } 
-function formSubmitHandler1 (evt) {
-    evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
-                                                // Так мы можем определить свою логику отправки.
-                                                // О том, как это делать, расскажем позже.
-    const newEl= templateEl.content.firstElementChild.cloneNode(true);
-    newEl.querySelector('.places__title').innerText=titleInput.value;
-    popupAdd.appendChild(newEl);
-    titleInput.value='';
-/////////////////////////////!!!!!!!!!!!!!!!!11
-    titleLoc.textContent = titleInput.value;
-    imgLoc.textContent = imgInput.value;
-   //////////////////////////////////// 1111111111
-    popAddClose(); 
-}
-formElement.addEventListener('submit', formSubmitHandler1); 
-addButton.addEventListener('click', addPlace);  */
-addButton.addEventListener('click', popAddOpen);
-addCloseButton.addEventListener('click', popAddClose);
-///////////////////////////////////////////////////////////////////////////
-function popOpen(){
-    popup.classList.add('popup_opened');
-    
-}
-function popClose(){
-    popup.classList.remove('popup_opened');
-}
+// создание карточки с функционалом элементов
+function addPlace(elm) {
+  const newElm= document.querySelector('#places-card-template').content.firstElementChild.cloneNode(true);
 
-
-function formSubmitHandler (evt) {
-    evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
-                                                // Так мы можем определить свою логику отправки.
-                                                // О том, как это делать, расскажем позже.
-
-   
-    profileTitle.textContent = nameInput.value;
-    profileSubtitle.textContent = jobInput.value;
-    popClose();
-}
-function editProfile(){
-    popOpen();
-    nameInput.value = profileTitle.textContent;
-    jobInput.value = profileSubtitle.textContent;
-  }
+  newElm.querySelector('.places__image').src = elm.link;
+  newElm.querySelector('.places__image').alt = elm.name;
+  newElm.querySelector('.places__title').textContent = elm.name;
+  newElm.querySelector('.places__like').addEventListener('click', handleLikeIcon);
+  newElm.querySelector('.places__delete').addEventListener('click', deleteCard);
+  newElm.querySelector('.places__image').addEventListener('click', showImage);
   
+  return newElm;
+}
 
+// отрисовка карточки на странице 
+function renderPlace(elm) {
+  placesCont.prepend(addPlace(elm));
+}
 
+initialCards.forEach(renderPlace);
 
+const popupPlace = document.querySelector('#popup-add');
+// открытие окна добавления карты
+const addButton = document.querySelector('.profile__add');
+addButton.addEventListener('click', function () {
+  openPopup(popupPlace);
+})
 
-// Прикрепляем обработчик к форме:
-// он будет следить за событием “submit” - «отправка»
-formElement.addEventListener('submit', formSubmitHandler); 
-editButton.addEventListener('click', editProfile);
+// закрытие окна добавления карты
+const addCloseButton = document.querySelector('#popup-add .popup__close');
+addCloseButton.addEventListener('click', function () {
+  closePopup(popupPlace);
+});
 
-closeButton.addEventListener('click', popClose);
-/////////////////////////////////////////////
-/* addButton.addEventListener('click', popAddOpen) */
+const formAddEl = document.querySelector('#popup-add .popup__container');
+const titleInput = formAddEl.querySelector('.popup__text_type_title');
+const linkInput = formAddEl.querySelector('.popup__text_type_image-link');
+
+// обработчик отправки формы добавления карты
+function formSubmitHandlerAdd(evt) {
+  evt.preventDefault();
+  const newPost = {
+    name: titleInput.value,
+    link: linkInput.value
+  }
+  if (titleInput.value && linkInput.value) {
+    renderPlace(newPost);
+  }
+  closePopup(popupPlace);
+ 
+}
+
+formAddEl.addEventListener('submit', formSubmitHandlerAdd);
+
+function handleLikeIcon(evt) {
+  evt.target.classList.toggle('places__like_active');
+}
+function deleteCard(e) {
+  e.target.closest('.places__card').remove();
+}
+
+const popImg = document.querySelector('#popup-image');
+const imgCloseBtn = popImg.querySelector('#popup-close-image')
+const image = popImg.querySelector('.popup__image');
+const imageTitle = popImg.querySelector('.popup__title');
+
+function showImage(evt){
+  openPopup(popImg);
+  image.src = evt.target.src;
+  image.alt = evt.target.alt;
+  imageTitle.textContent = evt.target.alt;
+}
+imgCloseBtn.addEventListener('click', function(){
+  closePopup(popImg)
+});
