@@ -1,8 +1,8 @@
 const popup = document.querySelector('.popup');
 // Воспользуйтесь методом querySelector()
 // Находим поля формы в DOM
-const nameInput = document.querySelector('.popup__text_type_user');// Воспользуйтесь инструментом .querySelector()
-const jobInput = document.querySelector('.popup__text_type_user-information');// Воспользуйтесь инструментом .querySelector()
+const nameInput = document.querySelector('.popup__input_type_user');// Воспользуйтесь инструментом .querySelector()
+const jobInput = document.querySelector('.popup__input_type_user-information');// Воспользуйтесь инструментом .querySelector()
 
 const editButton = document.querySelector('.profile__edit');
 
@@ -11,11 +11,34 @@ const profileSubtitle = document.querySelector('.profile__subtitle');
 
 const popupProfile = document.querySelector('#popup-profile');
 
+
+  // закрытие попап кликом на оверлей
+function closePopupOnOverlay(evt) {
+    const popupOpened = document.querySelector('.popup_opened');
+    if (evt.target.classList.contains('popup_opened')) {
+      closePopup(popupOpened);
+    }
+}
+  
+  // закрытие попап нажатием на esc
+function closePopupOnEsc(evt) {
+    if (evt.key === 'Escape') {
+      const popupOpened = document.querySelector('.popup_opened');
+      closePopup(popupOpened);
+    }
+}
+  
+
+
 function openPopup(popup) {
   popup.classList.add('popup_opened');
+  document.addEventListener('keydown', closePopupOnEsc);
+  popup.addEventListener('click', closePopupOnOverlay);
 }
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', closePopupOnEsc);
+  popup.removeEventListener('click', closePopupOnOverlay);
 }
 
 function submitEditProfileForm (evt) {
@@ -35,7 +58,7 @@ function editProfile(){
 
 // Прикрепляем обработчик к форме:
 // он будет следить за событием “submit” - «отправка»
-const formEditProfile = document.querySelector('.popup__content');
+const formEditProfile = document.querySelector('.popup__form');
 formEditProfile.addEventListener('submit', submitEditProfileForm); 
 editButton.addEventListener('click', editProfile);
 /* editButton.addEventListener('click', popOpen); */
@@ -85,8 +108,8 @@ addCardPopupCloseBtn.addEventListener('click', function () {
 });
 
 const formAddCard = document.querySelector('#popup-add-container');
-const titleInput = formAddCard.querySelector('.popup__text_type_title');
-const linkInput = formAddCard.querySelector('.popup__text_type_image-link');
+const titleInput = formAddCard.querySelector('.popup__input_type_title');
+const linkInput = formAddCard.querySelector('.popup__input_type_image-link');
 
 // обработчик отправки формы добавления карты
 function submitAddCardForm(evt) {
