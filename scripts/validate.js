@@ -3,7 +3,9 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 const configValid ={
     submitButtonSelector: '.popup__save',
-    inactiveButtonClass: '.popup__save_disabled',
+    inactiveButtonClass: 'popup__save_disabled',
+    inputSelector: '.popup__input',
+    inputErrorClass: 'popup__input_type_error'
 }
 
 const formAddCard1=document.forms.formAddPlace;
@@ -20,18 +22,21 @@ function isFieldValid(input) {
 
     if (input.validity.valueMissing){
         input.setCustomValidity(errorMessage.empty);
-
+        input.classList.add(configValid.inputErrorClass);
         return false
+    }else{
+        input.classList.remove(configValid.inputErrorClass);
     }
+
     if (input.validity.tooShort){
         input.setCustomValidity(errorMessage.minSimbols);
-
+        input.classList.add(configValid.inputErrorClass);
         return false
     }
 
     if (input.validity.typeMismatch && input.type === 'url'){
         input.setCustomValidity(errorMessage.url);
-
+        input.classList.add(configValid.inputErrorClass);
         return false
     }
 
@@ -51,12 +56,14 @@ function setSubmitButtonState (button, state) {
         //button.setAtribute('disabled', false);
         
         button.classList.remove(configValid.inactiveButtonClass);
+ 
         // button.classList.add('popup__button_valid') //Надо сделать CSS
         // button.classList.remove('popup__button_invalid') //Надо сделать CSS
         return true
     }
     // button.classList.remove('popup__button_valid') //Надо сделать
     button.classList.add(configValid.inactiveButtonClass);
+    
     //button.setAtribute('disabled', true);
 }
 //обработчик
