@@ -85,7 +85,7 @@ function handlerInputForm(input, config) {
 
 const setEventListeners = (formElement, config) => {
     const inputList = Array.from(formElement.querySelectorAll(config.inputSelector));
-    const buttonElement = formElement.querySelector(config.submitButtonSelector);
+    
     inputList.forEach((inputElement) => {
       inputElement.addEventListener('input', () => {handlerInputForm(inputElement, config);}, true);
     });
