@@ -80,10 +80,7 @@ function handlerInputForm(input, config) {
     }
 }
 
-//Отправка формы
-function sendForm(evt) {
-    // теперь ничего не лелает
-} 
+
 
 
 const setEventListeners = (formElement, config) => {
@@ -92,15 +89,15 @@ const setEventListeners = (formElement, config) => {
     inputList.forEach((inputElement) => {
       inputElement.addEventListener('input', () => {handlerInputForm(inputElement, config);}, true);
     });
-    buttonElement.addEventListener('submit', sendForm);
+
   };
 
 function enableValidation (config){
-    const form= document.querySelector('#popup-add-container');
-    const profile = document.querySelector('#popup-profile');
+    const form= Array.from(document.querySelectorAll('.popup__container'));
 
-    setEventListeners(form, config)
-    setEventListeners(profile, config)
+   form.forEach((forme) => {
+    setEventListeners(forme, config);
+   });
+
 }
-
 enableValidation(configValid);
