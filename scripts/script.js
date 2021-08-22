@@ -1,6 +1,7 @@
-const popup = document.querySelector('.popup');
+//const popup = document.querySelector('.popup');
 // Воспользуйтесь методом querySelector()
 // Находим поля формы в DOM
+
 const nameInput = document.querySelector('.popup__input_type_user');// Воспользуйтесь инструментом .querySelector()
 const jobInput = document.querySelector('.popup__input_type_user-information');// Воспользуйтесь инструментом .querySelector()
 
@@ -14,8 +15,9 @@ const popupProfile = document.querySelector('#popup-profile');
 
   // закрытие попап кликом на оверлей
 function closePopupOnOverlay(evt) {
-    const popupOpened = document.querySelector('.popup_opened');
+   
     if (evt.target.classList.contains('popup_opened')) {
+      const popupOpened = document.querySelector('.popup_opened');
       closePopup(popupOpened);
     }
 }
@@ -32,6 +34,7 @@ function closePopupOnEsc(evt) {
 
 function openPopup(popup) {
   popup.classList.add('popup_opened');
+  
   document.addEventListener('keydown', closePopupOnEsc);
   popup.addEventListener('click', closePopupOnOverlay);
 }
@@ -42,17 +45,21 @@ function closePopup(popup) {
 }
 
 function submitEditProfileForm (evt) {
-    evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
+  evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
 
-    profiletitle.textContent = nameInput.value;
-    profileSubtitle.textContent = jobInput.value;
-    closePopup(popupProfile);
+  profiletitle.textContent = nameInput.value;
+  profileSubtitle.textContent = jobInput.value;
+  
+  const form = evt.target;
+  const submitButton = form.querySelector(configValid.submitButtonSelector);
+  setSubmitButtonState(submitButton, true, configValid);
+  closePopup(popupProfile);
 }
 function editProfile(){
-    openPopup(popupProfile);
+  openPopup(popupProfile);
     /* popOpen(); */
-    nameInput.value = profiletitle.textContent;
-    jobInput.value = profileSubtitle.textContent;
+  nameInput.value = profiletitle.textContent;
+  jobInput.value = profileSubtitle.textContent;
 
 }
 
@@ -118,12 +125,13 @@ function submitAddCardForm(evt) {
     name: titleInput.value,
     link: linkInput.value
   }
-  if (titleInput.value && linkInput.value) {
-    renderPlace(newPost);
-    
-  }
+  
+  renderPlace(newPost);
   closePopup(popupPlace);
   document.querySelector('#popup-form-add').reset();
+  const form = evt.target;
+  const submitButton = form.querySelector(configValid.submitButtonSelector);
+  setSubmitButtonState(submitButton, false, configValid);
 }
 
 formAddCard.addEventListener('submit', submitAddCardForm);
