@@ -75,7 +75,7 @@ function submitEditProfileForm (evt) {
   profileSubtitle.textContent = jobInput.value;
   
   const form = evt.target;
-  const submitButton = form.querySelector(configValid.submitButtonSelector);
+  //const submitButton = form.querySelector(configValid.submitButtonSelector);
   //setSubmitButtonState(submitButton, true, configValid);
   closePopup(popupProfile);
 }
@@ -100,7 +100,7 @@ editProfilePopupCloseBtn.addEventListener('click', function () {
 });
 ///////////////////////////////////////////////////////////////////
 
-const placesContainer = document.querySelector('.places');
+//const placesContainer = document.querySelector('.places');
 
 
 // создание карточки с функционалом элементов
@@ -145,8 +145,9 @@ function submitAddCardForm(evt) {
   renderPlace(newPost);
   closePopup(popupPlace);
   document.querySelector('#popup-form-add').reset();
-  const form = evt.target;
-  const submitButton = form.querySelector(configValid.submitButtonSelector);
+  buttonSaveDisabled(buttonSavepAddProfile)
+  //const form = evt.target;
+  //const submitButton = form.querySelector(configValid.submitButtonSelector);
   //setSubmitButtonState(submitButton, false, configValid);
 }
 
@@ -156,10 +157,19 @@ formAddCard.addEventListener('submit', submitAddCardForm);
 const popupImage = document.querySelector('#popup-image');
 const imgCloseBtn = popupImage.querySelector('#popup-close-image')
 
+
 imgCloseBtn.addEventListener('click', function(){
   closePopup(popupImage)
 });
 
+////////////////////////////
+const buttonSavepAddProfile = document.querySelector('#btn-add-save');
+
+function buttonSaveDisabled(buttonElement){
+  buttonElement.classList.add('popup__save_disabled');
+  buttonElement.disabled = true;
+}
+////////////////////////////
 const editProfileFormValidate = new FormValidator(configValid, formEditProfile);
 const addPostFormValidate = new FormValidator(configValid, formAddCard);
 

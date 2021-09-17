@@ -13,7 +13,7 @@ const configValid ={
         minSimbols:'Минимальное колличество символов 2'
     }
 }
-const formUser=document.forms.editingInformation;
+
 class FormValidator {
     constructor(config, formElement) {
         this._submitButtonSelector=config.submitButtonSelector;
@@ -25,7 +25,7 @@ class FormValidator {
 
     }
     //Валидный ли инпут
-    _isFieldValid(input, config) {
+    _isFieldValid(input) {
         input.setCustomValidity('');
 
         if (input.validity.valueMissing){
@@ -51,15 +51,13 @@ class FormValidator {
         return input.checkValidity();
     }
     //сама валидация
-    _validateField(input, config) {
+    _validateField(input) {
         const errorElement = this._formElement.parentNode.querySelector(`#${input.id}-error`);
-        this._isFieldValid(input, config);
-        //input?.validationMessage ? this._setSubmitButtonState(submitButton, false, configValid) : this._setSubmitButtonState(submitButton, true, configValid);
+        this._isFieldValid(input);
         errorElement.textContent = input.validationMessage;
     }
     //Состояние кнопки
-    _setSubmitButtonState (button, state, config) {
-        console.log(state);
+    _setSubmitButtonState (button, state) {
         if(state){
         
             button.classList.remove(this._inactiveButtonClass);
@@ -72,49 +70,32 @@ class FormValidator {
         button.disabled = true;
     }
     //обработчик
-    _handlerInputForm(input, config) {
+    _handlerInputForm(input) {
         const form = input.parentNode;
         const submitButton = form.querySelector(this._submitButtonSelector);
-        console.log(submitButton);
-        this._validateField(input, config);
+        this._validateField(input);
     
 
         if(form.checkValidity()){
-            this._setSubmitButtonState(submitButton, true, config);
+            this._setSubmitButtonState(submitButton, true);
         } else{
-            this._setSubmitButtonState(submitButton, false, config);
+            this._setSubmitButtonState(submitButton, false);
         }
     }
 
-    _setEventListeners (formElement, config){
+    _setEventListeners (){
         const inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
         
         inputList.forEach((inputElement) => {
-        inputElement.addEventListener('input', () => {this._handlerInputForm(inputElement, config);}, true);
+        inputElement.addEventListener('input', () => {this._handlerInputForm(inputElement);}, true);
         });
 
     }
-    /* enableValidation (config){
-        const form= Array.from(document.querySelectorAll('.popup__container'));
-
-        form.forEach((forme) => {
-            this._setEventListeners(forme,date, config);
-            this._formElement.addEventListener('submit', (evt) => {
-                evt.preventDefault();
-              });
-        });
-
-    } */
     
-    enableValidation (config){
-        const form= Array.from(document.querySelectorAll('.popup__container'));
+    enableValidation (){
 
-        form.forEach((forme) => {
-            this._setEventListeners(forme, config);
-        });
-
+        this._setEventListeners();
     }
-    /* enableValidation(configValid); */
 }
 
 export { FormValidator, configValid }

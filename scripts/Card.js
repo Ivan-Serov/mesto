@@ -18,16 +18,13 @@ class Card{
         this._element.querySelector('.places__delete').closest('.places__card').remove();
     }
     _ShowImage(){
-        //const popupImage = document.querySelector('#popup-image');
         const image = popupImage.querySelector('.popup__image');
         const imageTitle = popupImage.querySelector('.popup__title');
         openPopup(popupImage);
         image.src = this._link;
         image.alt = this._name;
         imageTitle.textContent = this._name;
-       /*  image.src = evt.target.src;
-        image.alt = evt.target.alt;
-        imageTitle.textContent = evt.target.alt; */
+       
     }
     _setEventListeners() {
         this._element.querySelector('.places__like').addEventListener('click', () => {
