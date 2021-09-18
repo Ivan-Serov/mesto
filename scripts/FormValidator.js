@@ -24,9 +24,10 @@ class FormValidator {
         this._formElement=formElement;
 
     }
-    _showInputError(input){
+    _showInputError(input, a){
         
         input.classList.add(this._inputErrorClass);
+        input.setCustomValidity(a);
         return false
     }
     //Валидный ли инпут
@@ -34,20 +35,18 @@ class FormValidator {
         input.setCustomValidity('');
 
         if (input.validity.valueMissing){
-            input.setCustomValidity(this._errorMessage.empty);
-            this._showInputError(input);
+           
+            this._showInputError(input, this._errorMessage.empty);
         }else{
             input.classList.remove(this._inputErrorClass);
         }
 
         if (input.validity.tooShort){
-            input.setCustomValidity(this._errorMessage.minSimbols);
-            this._showInputError(input);
+            this._showInputError(input, this._errorMessage.minSimbols);
         }
 
         if (input.validity.typeMismatch && input.type === 'url'){
-            input.setCustomValidity(this._errorMessage.url);
-            this._showInputError(input);
+            this._showInputError(input, this._errorMessage.url);
         }
 
         return input.checkValidity();
