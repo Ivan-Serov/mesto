@@ -24,28 +24,30 @@ class FormValidator {
         this._formElement=formElement;
 
     }
+    _showInputError(input){
+        
+        input.classList.add(this._inputErrorClass);
+        return false
+    }
     //Валидный ли инпут
     _isFieldValid(input) {
         input.setCustomValidity('');
 
         if (input.validity.valueMissing){
             input.setCustomValidity(this._errorMessage.empty);
-            input.classList.add(this._inputErrorClass);
-            return false
+            this._showInputError(input);
         }else{
             input.classList.remove(this._inputErrorClass);
         }
 
-         if (input.validity.tooShort){
+        if (input.validity.tooShort){
             input.setCustomValidity(this._errorMessage.minSimbols);
-            input.classList.add(this._inputErrorClass);
-            return false
+            this._showInputError(input);
         }
 
         if (input.validity.typeMismatch && input.type === 'url'){
             input.setCustomValidity(this._errorMessage.url);
-            input.classList.add(this._inputErrorClass);
-            return false
+            this._showInputError(input);
         }
 
         return input.checkValidity();

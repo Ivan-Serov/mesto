@@ -154,9 +154,22 @@ function submitAddCardForm(evt) {
 formAddCard.addEventListener('submit', submitAddCardForm);
 
 
+
 const popupImage = document.querySelector('#popup-image');
 const imgCloseBtn = popupImage.querySelector('#popup-close-image')
+const image = popupImage.querySelector('.popup__image');
+const imageTitle = popupImage.querySelector('.popup__title');
 
+function showImage(link, name){
+  openPopup(popupImage);
+  image.src = link;
+  image.alt = name;
+  imageTitle.textContent =name;
+ /*  openPopup(popupImage);
+  image.src = evt.target.src;
+  image.alt = evt.target.alt;
+  imageTitle.textContent = evt.target.alt; */
+}
 
 imgCloseBtn.addEventListener('click', function(){
   closePopup(popupImage)
@@ -179,4 +192,4 @@ addPostFormValidate.enableValidation();
 
 
 
-export { openPopup, popupImage }
+export { openPopup, popupImage,showImage }
