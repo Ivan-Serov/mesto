@@ -24,10 +24,10 @@ class FormValidator {
         this._formElement=formElement;
 
     }
-    _showInputError(input, a){
+    _showInputError(input, message){
         
         input.classList.add(this._inputErrorClass);
-        input.setCustomValidity(a);
+        input.setCustomValidity(message);
         return false
     }
     //Валидный ли инпут
