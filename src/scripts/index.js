@@ -127,7 +127,7 @@ const cardList = new Section({
   renderer: (cardItem) => {
     const place = new Card({
       data: cardItem
-      //handleCardClick: () => handleCardClick(cardItem)
+
     }, '#places-card-template');
     console.log(cardItem);
 
