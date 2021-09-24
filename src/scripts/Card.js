@@ -17,15 +17,6 @@ class Card{
     _deleteCard(){
         this._element.querySelector('.places__delete').closest('.places__card').remove();
     }
-    /* _ShowImage(){
-        const image = popupImage.querySelector('.popup__image');
-        const imageTitle = popupImage.querySelector('.popup__title');
-        openPopup(popupImage);
-        image.src = this._link;
-        image.alt = this._name;
-        imageTitle.textContent = this._name;
-       
-    } */
     _setEventListeners() {
         this._element.querySelector('.places__like').addEventListener('click', () => {
             this._handleLikeIcon();
@@ -34,9 +25,7 @@ class Card{
             this._deleteCard();
           });
           this._element.querySelector('.places__image').addEventListener('click', () => { showImage(this._link, this._name) });
-         /*  this._element.querySelector('.places__image').addEventListener('click', () => {
-            this._ShowImage();
-          }); */
+        
     }
     generatePost() {
         this._element = this._getTemplate();

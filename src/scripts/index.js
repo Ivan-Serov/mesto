@@ -1,7 +1,10 @@
 //const popup = document.querySelector('.popup');
-
+import '../pages/index.css'; // добавьте импорт главного файла стилей 
 import { Card } from './Card.js';
 import { FormValidator, configValid } from './FormValidator.js';
+import Section from './Section.js';
+
+
 // Воспользуйтесь методом querySelector()
 // Находим поля формы в DOM
 const initialCards = [
@@ -106,16 +109,42 @@ editProfilePopupCloseBtn.addEventListener('click', function () {
 // создание карточки с функционалом элементов
 
 // отрисовка карточки на странице 
-function renderPlace(elm) {
+/* function renderPlace(elm) {
   const places = document.querySelector('.places');
   const place = new Card(elm, '#places-card-template');
 
   const placeElement = place.generatePost();
   places.prepend(placeElement);
- 
+  console.log(places+' List');
 }
 
-initialCards.forEach(renderPlace);
+
+initialCards.forEach(renderPlace); */
+///////////////////////////////////////////////
+
+const cardList = new Section({
+  data: initialCards,
+  renderer: (cardItem) => {
+    const place = new Card({
+      data: cardItem
+      //handleCardClick: () => handleCardClick(cardItem)
+    }, '#places-card-template');
+    console.log(cardItem);
+
+    const placeElement = place.generatePost();
+    cardList.addItem(placeElement);
+    //////////
+    console.log(placeElement+'PE');
+    console.log(place+'P');
+    console.log(cardList.getList()+' List');
+  }
+}, '.places');
+
+// вызов отрисовки постов на странице 
+
+cardList.renderItems();
+////////////////////////////////////////////////////////////
+
 
 const popupPlace = document.querySelector('#popup-add');
 // открытие окна добавления карты
@@ -142,7 +171,7 @@ function submitAddCardForm(evt) {
     link: linkInput.value
   }
   
-  renderPlace(newPost);
+  addItem(newPost);
   closePopup(popupPlace);
   document.querySelector('#popup-form-add').reset();
   buttonSaveDisabled(buttonSavepAddProfile)
@@ -165,10 +194,7 @@ function showImage(link, name){
   image.src = link;
   image.alt = name;
   imageTitle.textContent =name;
- /*  openPopup(popupImage);
-  image.src = evt.target.src;
-  image.alt = evt.target.alt;
-  imageTitle.textContent = evt.target.alt; */
+ 
 }
 
 imgCloseBtn.addEventListener('click', function(){
