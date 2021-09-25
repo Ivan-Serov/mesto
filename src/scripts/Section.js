@@ -14,8 +14,8 @@ export default class Section {
     }
   
     addItem(element) {      
-        console.log(element+' element');
-        console.log(this._cardSelector+' cardSelector');
+        /* console.log(element+' element');
+        console.log(this._cardSelector+' cardSelector'); */
         this._cardSelector.prepend(element);
     }
     getList() {return this._cardSelector;}
