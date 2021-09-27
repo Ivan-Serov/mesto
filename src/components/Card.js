@@ -1,4 +1,4 @@
-//import { openPopup, popupImage, showImage } from './index.js'
+
 
 class Card{
     constructor({data, handleCardClick}, cardSelector){
@@ -9,7 +9,7 @@ class Card{
     }
 
     _getTemplate(){
-        const cardTemplate = document.querySelector('#places-card-template').content.firstElementChild.cloneNode(true);
+        const cardTemplate = document.querySelector(this._cardSelector).content.firstElementChild.cloneNode(true);
         return cardTemplate;
     }
     _handleLikeIcon(){

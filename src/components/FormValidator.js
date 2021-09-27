@@ -10,7 +10,8 @@ const configValid ={
     errorMessage: {
         empty:'Это поле обязательно',
         url:'Введите правильный url',
-        minSimbols:'Минимальное колличество символов 2'
+        minSimbols:'Минимальное колличество символов 2',
+        noError: ' '
     }
 }
 
@@ -22,10 +23,16 @@ class FormValidator {
         this._inputErrorClass=config.inputErrorClass;
         this._errorMessage=config.errorMessage;
         this._formElement=formElement;
+        //////////
 
+        this._btnAddSave= formElement.querySelector('#btn-add-save');
+        this._btnEditSave= formElement.querySelector('#btn-edit-save');
+        this._InputList = formElement.querySelectorAll(this._inputSelector);
+        this._span = formElement.querySelectorAll('.error');
     }
+
     _showInputError(input, message){
-        
+       
         input.classList.add(this._inputErrorClass);
         input.setCustomValidity(message);
         return false
@@ -48,7 +55,7 @@ class FormValidator {
         if (input.validity.typeMismatch && input.type === 'url'){
             this._showInputError(input, this._errorMessage.url);
         }
-
+        
         return input.checkValidity();
     }
     //сама валидация
@@ -56,6 +63,24 @@ class FormValidator {
         const errorElement = this._formElement.parentNode.querySelector(`#${input.id}-error`);
         this._isFieldValid(input);
         errorElement.textContent = input.validationMessage;
+    }
+    resetValidation() {
+        if (this._btnAddSave){
+           this._btnAddSave.classList.add('popup__save_disabled');
+           this._btnAddSave.disabled = true;
+        } else{
+            this._btnEditSave.classList.remove('popup__save_disabled');
+            this._btnEditSave.disabled = false;
+        }
+       
+        this._InputList.forEach((inputElement) => {
+            inputElement.classList.remove(this._inputErrorClass);
+            //this._isFieldValid(inputElement);
+        });
+        this._span.forEach((spanElement) => {
+            spanElement.textContent = '';
+        });
+
     }
     //Состояние кнопки
     _setSubmitButtonState (button, state) {
