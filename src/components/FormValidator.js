@@ -7,11 +7,11 @@ const configValid ={
     inactiveButtonClass: 'popup__save_disabled',
     inputSelector: '.popup__input',
     inputErrorClass: 'popup__input_type_error',
+    inputSpanError: '.error',
     errorMessage: {
         empty:'Это поле обязательно',
         url:'Введите правильный url',
-        minSimbols:'Минимальное колличество символов 2',
-        noError: ' '
+        minSimbols:'Минимальное колличество символов 2'
     }
 }
 
@@ -23,12 +23,12 @@ class FormValidator {
         this._inputErrorClass=config.inputErrorClass;
         this._errorMessage=config.errorMessage;
         this._formElement=formElement;
+        this._inputSpanError = config.inputSpanError;
         //////////
 
-        this._btnAddSave= formElement.querySelector('#btn-add-save');
-        this._btnEditSave= formElement.querySelector('#btn-edit-save');
-        this._InputList = formElement.querySelectorAll(this._inputSelector);
-        this._span = formElement.querySelectorAll('.error');
+        this._inputList = formElement.querySelectorAll(this._inputSelector);
+        this._spanErrorList = formElement.querySelectorAll(this._inputSpanError);
+        this._btnSave = formElement.querySelector(this._submitButtonSelector)
     }
 
     _showInputError(input, message){
@@ -65,19 +65,26 @@ class FormValidator {
         errorElement.textContent = input.validationMessage;
     }
     resetValidation() {
-        if (this._btnAddSave){
-           this._btnAddSave.classList.add('popup__save_disabled');
+        /* if (this._btnAddSave){
+           this._btnAddSave.classList.add(this._inactiveButtonClass);
            this._btnAddSave.disabled = true;
         } else{
-            this._btnEditSave.classList.remove('popup__save_disabled');
+            this._btnEditSave.classList.remove(this._inactiveButtonClass);
             this._btnEditSave.disabled = false;
-        }
+        } */
        
-        this._InputList.forEach((inputElement) => {
+
+        this._inputList.forEach((inputElement) => {
             inputElement.classList.remove(this._inputErrorClass);
-            //this._isFieldValid(inputElement);
+            if(inputElement.checkValidity()){
+                this._btnSave.classList.remove(this._inactiveButtonClass);
+                this._btnSave.disabled = false;
+            }else{
+                this._btnSave.classList.add(this._inactiveButtonClass);
+                this._btnSave.disabled = true;
+            }
         });
-        this._span.forEach((spanElement) => {
+        this._spanErrorList.forEach((spanElement) => {
             spanElement.textContent = '';
         });
 
@@ -110,9 +117,9 @@ class FormValidator {
     }
 
     _setEventListeners (){
-        const inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
+
         
-        inputList.forEach((inputElement) => {
+        this._inputList.forEach((inputElement) => {
         inputElement.addEventListener('input', () => {this._handlerInputForm(inputElement);}, true);
         });
 

@@ -11,7 +11,7 @@ import {
   sectionSelector,
   popupPlace,
   popupImage
-} from '../components/utils/constants.js'
+} from '../utils/constants.js'
 import '../pages/index.css'; // добавьте импорт главного файла стилей 
 import { Card } from '../components/Card.js';
 import { FormValidator, configValid } from '../components/FormValidator.js';

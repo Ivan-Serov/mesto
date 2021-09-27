@@ -30,9 +30,9 @@
         <p class="footer__author">&copy; 2021. Иван Серов</p>
     </footer>
     <div class="popup" id="popup-profile" >
-        <div class="popup__container">
+        <div class="popup__container" id="popup-edit-container">
             <button type="button" class="popup__close"></button>
-            <form class="popup__form" method="POST" id="editingInformation" name="editingInformation">
+            <form class="popup__form" method="POST" id="popup-form-edit" name="editingInformation">
                 <h2 class="popup__title">Редактировать профиль</h2>
                 <input name="user" id="user" type="text" placeholder="Имя" class="popup__input popup__input_type_user" minlength="2" maxlength="40" required>
                 <span id="user-error" class="error"></span>
