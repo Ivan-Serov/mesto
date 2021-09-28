@@ -65,54 +65,43 @@ class FormValidator {
         errorElement.textContent = input.validationMessage;
     }
     resetValidation() {
-        /* if (this._btnAddSave){
-           this._btnAddSave.classList.add(this._inactiveButtonClass);
-           this._btnAddSave.disabled = true;
-        } else{
-            this._btnEditSave.classList.remove(this._inactiveButtonClass);
-            this._btnEditSave.disabled = false;
-        } */
-       
-
+        
+        let allInputValid = true;
         this._inputList.forEach((inputElement) => {
+            inputElement.setCustomValidity('');
             inputElement.classList.remove(this._inputErrorClass);
-            if(inputElement.checkValidity()){
-                this._btnSave.classList.remove(this._inactiveButtonClass);
-                this._btnSave.disabled = false;
-            }else{
-                this._btnSave.classList.add(this._inactiveButtonClass);
-                this._btnSave.disabled = true;
-            }
+            allInputValid = allInputValid && inputElement.checkValidity();   
         });
+        this._setSubmitButtonState (allInputValid);
         this._spanErrorList.forEach((spanElement) => {
             spanElement.textContent = '';
         });
 
     }
     //Состояние кнопки
-    _setSubmitButtonState (button, state) {
+    _setSubmitButtonState (state) {
         if(state){
         
-            button.classList.remove(this._inactiveButtonClass);
-            button.disabled = false;
+            this._btnSave.classList.remove(this._inactiveButtonClass);
+            this._btnSave.disabled = false;
 
-            return true
+            return true;
         }
-
-        button.classList.add(this._inactiveButtonClass);
-        button.disabled = true;
+        else{
+            this._btnSave.classList.add(this._inactiveButtonClass);
+            this._btnSave.disabled = true;
+            return false;
+        }
+        
     }
     //обработчик
     _handlerInputForm(input) {
-        const form = input.parentNode;
-        const submitButton = form.querySelector(this._submitButtonSelector);
         this._validateField(input);
-    
 
-        if(form.checkValidity()){
-            this._setSubmitButtonState(submitButton, true);
+        if(this._formElement.checkValidity()){
+            this._setSubmitButtonState(true);
         } else{
-            this._setSubmitButtonState(submitButton, false);
+            this._setSubmitButtonState(false);
         }
     }
 
