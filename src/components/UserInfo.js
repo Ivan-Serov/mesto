@@ -5,15 +5,25 @@ export default class UserInfo {
   }
 
   getUserInfo() {
+    /* this._userInfo = {};
+    return {
+      name: this._userNameElement.textContent,
+      about: this._userAboutMeElement.textContent
+    } */
     this._userInfo = {};
-    this._userInfo.user= this._userNameElement.textContent;
+    return{
+      name: this._userNameElement.textContent,
+      about: this._userAboutMeElement.textContent
+    }
+    /* this._userInfo.name= this._userNameElement.textContent;
     this._userInfo.about = this._userAboutMeElement.textContent;
 
-    return this._userInfo;
+    return this._userInfo; */
   }
 
-  setUserInfo(data) {
-    this._userNameElement.textContent = data.user;
-    this._userAboutMeElement.textContent = data.about;
+  setUserInfo(UserInfo) {
+    this._userNameElement.textContent = UserInfo.name;
+    this._userAboutMeElement.textContent = UserInfo.about;
+    //console.log(data + '  UserInfo');
   }
 }
