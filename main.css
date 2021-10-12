@@ -36,6 +36,10 @@
 .popup__image{max-height:75vh;max-width:75vw}
 .popup_img{background:rgba(0,0,0,.9)}
 .popup__title_img{color:#fff;font-size:12px;font-style:normal;font-weight:400;line-height:15px;margin-top:10px}
+.popup__save_delete{margin-top:0}
+.popup__title_delete{padding-bottom:27px;padding-top:36px}
+.popup__form_delete{min-height:unset;padding:0 36px 34px}
+.popup__form_avatar{min-height:unset}
 .error{color:red;font-size:12px;font-style:normal;font-weight:400;line-height:15px;opacity:1}
 .error_visible{opacity:1}
 
