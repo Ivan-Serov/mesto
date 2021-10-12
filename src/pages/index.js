@@ -229,7 +229,7 @@ const popupAvatar = new PopupWithForm({
         popupAvatar.close();
       })
       .finally(() => {
-        btnAvatarSave.textContent='Создать';
+        btnAvatarSave.textContent='Сохранить';
       });
   }
   
