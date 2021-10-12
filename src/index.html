@@ -13,7 +13,7 @@
     <main>
         <section class="profile">
             <div class="profile__avatar">
-                <img src="https://i5.stat01.com/2/1818/118176103/075a3e/plakat-jojo-no-kimyou-na-bouken.jpg" class="profile__foto-avatar">
+                <img src="#" alt="avatar" class="profile__foto-avatar">
             </div>
             <div class="profile__text-group">
                 <div class="profile__title-box">
@@ -64,12 +64,12 @@
     <div class="popup" id="popup-avatar">
         <div class="popup__container" id="popup-avatar-container">
             <button type="button" class="popup__close" id="popup-close-avatar"></button>
-            <form class="popup__form" method="POST" name="formAvatar" id="popup-form-avatar">
+            <form class="popup__form popup__form_avatar" method="POST" name="formAvatar" id="popup-form-avatar">
                 <h2 class="popup__title">Обновить аватар</h2>
                
-                <input name="link" id="link-image" type="url" placeholder="Ссылка на картинку" class="popup__input popup__input_type_image-link" required>
-                <span id="link-image-error" class="error"></span>
-                <button id="btn-avatar-save" type="submit" class="popup__save popup__save_disabled" disabled>Создать</button>
+                <input name="avatar" id="link-avatar" type="url" placeholder="Ссылка на картинку" class="popup__input popup__input_type_image-link" required>
+                <span id="link-avatar-error" class="error"></span>
+                <button id="btn-avatar-save" type="submit" class="popup__save popup__save_disabled">Сохранить</button>
             </form>
             
         </div>
@@ -85,13 +85,14 @@
     <div class="popup" id="popup-delete">
         <div class="popup__container" id="popup-delete-container">
             <button type="button" class="popup__close" id="popup-close-delete"></button>
-            <form class="popup__form" method="POST" name="formDelete" id="popup-form-delete">
-                <h2 class="popup__title">Обновить аватар</h2>
-                <button id="btn-delete-save" type="submit" class="popup__save">ДАа</button>
+            <form class="popup__form popup__form_delete" method="POST" name="formDelete" id="popup-form-delete">
+                <h2 class="popup__title popup__title_delete">Вы уверены?</h2>
+                <button id="btn-delete-save" type="submit" class="popup__save popup__save_delete">ДА</button>
             </form>
             
         </div>
     </div>
+
 
     <template id="places-card-template">
         <div class="places__card">

@@ -1,19 +1,25 @@
 
 
 class Card{
-    constructor(data, userId, {handleCardClick, handleDelCard/* , handleLikeClick */}, cardSelector/* , {addLike, deleteLike} */){
+    constructor(data, userId, {handleCardClick, handleDelCard, handleLikeClick}, cardSelector/* , {addLike, deleteLike} */){
         this._name = data.name;
         this._link = data.link;
         this._likes = data.likes
         this._cardSelector = cardSelector;
         this._handleCardClick = handleCardClick;
-        this._handleDelCard = handleDelCard;
+        this._handleCardClick= this._handleCardClick.bind(this)
 
-        this._handleDelCard=this._handleDelCard.bind(this);
-        this._userId = userId;
-        this._deleteButtonHandler = this._deleteButtonHandler.bind(this);
+        this._userId = userId;        
         this._data = data;
-//////////////////////////
+
+        this._handleDelCard = handleDelCard;
+        this._handleDelCard=this._handleDelCard.bind(this);
+        this._deleteButtonHandler = this._deleteButtonHandler.bind(this);
+       
+        this._handleLikeClick= handleLikeClick;
+        this._handleLikeClick = this._handleLikeClick.bind(this);
+        this._handleLikeIcon = this._handleLikeIcon.bind(this);
+        //////////////////////////
         /* this._handleLikeClick = handleLikeClick; */
         //this.numberLikes = this.numberLikes.bind(this);
         //this._addLike=addLike;
@@ -24,21 +30,22 @@ class Card{
         const cardTemplate = document.querySelector(this._cardSelector).content.firstElementChild.cloneNode(true);
         return cardTemplate;
     }
-    _handleLikeIcon(){
-        this._element.querySelector('.places__like').classList.toggle('places__like_active');
+    /////////////////
+    _handleLikeIcon(evt){
+        /* this._element.querySelector('.places__like').classList.toggle('places__like_active'); */
+        this._handleLikeClick(evt.target, this._elementId, this._element);
     }
+    ////////////////
     _deleteCard(){
         this._element.querySelector('.places__delete').closest('.places__card').remove();
     }
     _setEventListeners() {
-        this._element.querySelector('.places__like').addEventListener('click', () => {
-            this._handleLikeIcon();
-          });
+        this._element.querySelector('.places__like').addEventListener('click', this._handleLikeIcon);
           this._element.querySelector('.places__delete').addEventListener('click', this._deleteButtonHandler);
           /* this._element.querySelector('.places__delete').addEventListener('click', () => {
             this._deleteCard();
           }); */
-          this._element.querySelector('.places__image').addEventListener('click', this._handleCardClick.bind(this));
+          this._element.querySelector('.places__image').addEventListener('click', this._handleCardClick);
         
     }
     generatePost() {
@@ -54,23 +61,31 @@ class Card{
         if (!(this._userId === this._data.owner._id)) {
             this._deleteButton.style.display = "none";
         }
-
-
+        /////////////////////
+        this._data.likes.forEach(elm =>{
+            if(elm._id === this._userId){
+                this._element.querySelector('.places__like').classList.add('places__like_active')
+            }
+        });
+        //////////////////////
         this._element.querySelector('.places__like-number').textContent = this._likes.length;
         return this._element;
     }
 
     _deleteButtonHandler() {
-        this._handleDelCard(this._element, this._elementId/* , this.deleteCard */);
+        this._handleDelCard(this._element, this._elementId, this.deleteCard);
       }
     
-    /* deleteCard() {
+    deleteCard() {
         this._element.remove();
-      } */
-    /* numberLikes(post, likes){
-        console.log(post+' post');
-        console.log(likes+' likes');
+    }
+    //////////
+
+    //////////
+    numberLikes(post, likes){
+        /* console.log(post+' post');
+        console.log(likes+' likes'); */
         post.querySelector('.places__like-number').textContent=likes.length;
-    } */
+    }
 };
 export {Card};

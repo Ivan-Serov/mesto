@@ -35,6 +35,14 @@ const popupProfile="#popup-profile";
 const sectionSelector = '.places';
 const popupPlace = '#popup-add';
 const popupImage ='#popup-image';
+const avatar = '.profile__avatar';
+const formAvatar = document.querySelector('#popup-form-avatar');
+const btnEditSave= document.querySelector('#btn-edit-save');
+const btnAddSave =document.querySelector('#btn-add-save');
+const btnAvatarSave =document.querySelector('#btn-avatar-save');
+const btnDelSave =document.querySelector('#btn-delete-save');
+
+
   export {
     initialCards,
     profileSubtitle,
@@ -47,5 +55,11 @@ const popupImage ='#popup-image';
     popupProfile,
     sectionSelector,
     popupPlace,
-    popupImage
+    popupImage,
+    avatar,
+    formAvatar,
+    btnEditSave,
+    btnAddSave,
+    btnAvatarSave,
+    btnDelSave
   }

@@ -25,7 +25,7 @@ class FormValidator {
         this._formElement=formElement;
         this._inputSpanError = config.inputSpanError;
         //////////
-
+        console.log(this._formElement);
         this._inputList = formElement.querySelectorAll(this._inputSelector);
         this._spanErrorList = formElement.querySelectorAll(this._inputSpanError);
         this._btnSave = formElement.querySelector(this._submitButtonSelector)
@@ -97,7 +97,7 @@ class FormValidator {
     //обработчик
     _handlerInputForm(input) {
         this._validateField(input);
-
+        
         if(this._formElement.checkValidity()){
             this._setSubmitButtonState(true);
         } else{

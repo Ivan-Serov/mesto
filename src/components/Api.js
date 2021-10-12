@@ -7,7 +7,7 @@ export default class Api {
     return fetch(this._url +'/users/me', {
       method: 'GET',
       headers: {
-          authorization: this._authorizationToken
+        authorization: this._authorizationToken
       }})
     .then(this.checkResult);
   }
@@ -47,6 +47,37 @@ export default class Api {
         authorization: this._authorizationToken,
         'Content-Type': 'application/json'
       },
+    })
+    .then(this.checkResult);
+  }
+  addLike(cardId){
+    return fetch(this._url + '/cards/likes/' + cardId, {
+      method: 'PUT',
+      headers: {
+        authorization: this._authorizationToken,
+        'Content-Type': 'application/json'
+      },
+    })
+    .then(this.checkResult);
+  }
+  deleteLike(cardId){
+    return fetch(this._url + '/cards/likes/' + cardId, {
+      method: 'DELETE',
+      headers: {
+        authorization: this._authorizationToken,
+        'Content-Type': 'application/json'
+      },
+    })
+    .then(this.checkResult);
+  }
+  addAvatar(avatar){
+    return fetch(this._url +'/users/me/avatar', {
+      method: 'PATCH',
+      headers: {
+        authorization: this._authorizationToken,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(avatar)
     })
     .then(this.checkResult);
   }

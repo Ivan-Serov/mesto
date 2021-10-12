@@ -10,7 +10,13 @@ import {
   popupProfile,
   sectionSelector,
   popupPlace,
-  popupImage
+  popupImage,
+  avatar,
+  formAvatar,
+  btnEditSave,
+  btnAddSave,
+  btnAvatarSave,
+  btnDelSave
 } from '../utils/constants.js'
 import '../pages/index.css'; // добавьте импорт главного файла стилей 
 import { Card } from '../components/Card.js';
@@ -30,17 +36,12 @@ let userId;
 Promise.all([api.getUserInfo(), api.getInitialCards()])
   .then(([userData, cards]) => {
     userId = userData._id;
-    //console.log([cards.likes]+' likes');
-    ///////////
-    /* console.log(api.getUserInfo());
-    console.log(userData._id +' userData._id');
-    console.log(userData.name +' userData.name');
-    console.log(userData.about +' userData.about'); */
-    
+
     ////////////
 
     cardList.renderItems(cards);
     userInfo.setUserInfo(userData);
+    userInfo.setUserInfoAvatar(userData);
 
     return userId;
 
@@ -51,11 +52,11 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
     return [];
   });
 // ///////////////
-const userInfo = new UserInfo({profiletitle, profileSubtitle});
+const userInfo = new UserInfo({profiletitle, profileSubtitle, avatar});
 
 const popupEditProfile = new PopupWithForm({
   handleSubmitForm: (item) => {
-
+    btnEditSave.textContent='Сохранение...';
     
     const userWithServer = api.editProfile(item);
     userWithServer
@@ -67,9 +68,11 @@ const popupEditProfile = new PopupWithForm({
         console.log(err);
         return [];
       }) 
+      .finally(() => {
+        btnEditSave.textContent='Сохранить';
+      });
   
-  
-  
+    
   }
 }, popupProfile);
 
@@ -102,8 +105,43 @@ function createCard(item){
     userId,
     {
     handleCardClick: () => handleCardClick(item),
-    handleDelCard: (post, cardId, deleteCard) => {
+    /* handleDelCard: (post, cardId, deleteCard) => {
       popupDelete.open(post, cardId, deleteCard);
+    }, */
+    handleDelCard: (postElement, cardId, deleteCard) => {
+      popupDelete.open(postElement, cardId, deleteCard);
+    },
+    handleLikeClick: (likeBtn, cardId,/* . */ card) =>{
+      if(likeBtn.classList.contains('places__like_active')){
+        api
+          .deleteLike(cardId)
+          .then((res)=>{
+            post.numberLikes(card, res.likes);
+          })
+          .catch((err) => {
+            console.log(err);
+  
+            return [];
+          })
+          .then(()=>{
+            likeBtn.classList.toggle('places__like_active')
+          });
+      }
+      else{
+        api
+          .addLike(cardId)
+          .then((res) => {
+            post.numberLikes(card, res.likes);
+          })
+          .catch((err) => {
+            console.log(err);
+
+            return [];
+          })
+          .then(()=>{
+            likeBtn.classList.toggle('places__like_active')
+          });
+      }
     }
   }, templateSelector);
   const postElement = post.generatePost();
@@ -115,6 +153,7 @@ function createCard(item){
 // обработчик открытия попапа добавления поста
 const popupAddPlace = new PopupWithForm({
   handleSubmitForm: (item) => {
+    btnAddSave.textContent='Сохранение...';
     const place1 = api.addPlace(item);
     place1
       .then((data) => {
@@ -126,6 +165,9 @@ const popupAddPlace = new PopupWithForm({
         console.log(err);
         return [];
       })
+      .finally(() => {
+        btnAddSave.textContent='Создать';
+      });
   }
 
   /* handleSubmitForm: (item) => {
@@ -148,25 +190,60 @@ function handleCardClick(dataParam) {
 /////////////////////////////
 
 const popupDelete = new PopupDelete(handleDelCardPopup,'#popup-delete')
-function handleDelCardPopup(post, cardId, deleteCard){
+function handleDelCardPopup(post, cardId){
   //console.log(cardId+' cardId');
-  popupDelete.open(cardId);
-  api
-  .deletePost(cardId)
-  .then(()=>{
-    console.log('udalyaem')
-    deleteCard();
-  })
-  .catch((err) => {
-    console.log(err);
+  //popupDelete.open(cardId);
+  btnDelSave.textContent='Удаление...';
+  api.deletePost(cardId).then(()=>{
+      //console.log('udalyaem');
+    
+      post.remove();
+    })
+    .catch((err) => {
+      console.log(err);
 
-    return [];
-  })
-  .then(() => {
-    popupDelete.close();
-  })
+      return [];
+    })
+    .then(() => {
+      popupDelete.close();
+    })
+    .finally(() => {
+      btnDelSave.textContent='Да';
+    });
 }
 ////////////////////////////
+const popupAvatar = new PopupWithForm({
+  handleSubmitForm: ({avatar}) =>{
+    btnAvatarSave.textContent='Сохранение...';
+    api
+      .addAvatar({ avatar })
+      .then((res) => {
+        userInfo.setUserInfoAvatar(res);
+      })
+      .catch((err) => {
+        console.log(err);
+  
+        return [];
+      })
+      .then(() => {
+        popupAvatar.close();
+      })
+      .finally(() => {
+        btnAvatarSave.textContent='Создать';
+      });
+  }
+  
+}, '#popup-avatar');
+function addAvatar(){
+  avatarFormValidate.resetValidation();
+  popupAvatar.open();
+  
+}
+
+document.querySelector(avatar).addEventListener('click', addAvatar);
+const avatarFormValidate = new FormValidator(configValid, formAvatar);
+
+avatarFormValidate.enableValidation();
 
 editProfileFormValidate.enableValidation();
 addPostFormValidate.enableValidation();
