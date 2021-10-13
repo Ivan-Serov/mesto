@@ -80,12 +80,9 @@ class Card{
     }
 
     _deleteButtonHandler() {
-        this._handleDelCard(this._element, this._elementId, this.deleteCard);
+        this._handleDelCard(this._element, this._elementId);
       }
     
-    deleteCard() {
-        this._element.remove();
-    }
     //////////
     isLiked(){
         if(this._likeBtn.classList.contains('places__like_active')){

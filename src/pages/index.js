@@ -110,8 +110,8 @@ function createCard(item){
     /* handleDelCard: (post, cardId, deleteCard) => {
       popupDelete.open(post, cardId, deleteCard);
     }, */
-    handleDelCard: (postElement, cardId, deleteCard) => {
-      popupDelete.open(postElement, cardId, deleteCard);
+    handleDelCard: (postElement, cardId) => {
+      popupDelete.open(postElement, cardId);
     },
     handleLikeClick: (likeBtn, cardId,card) =>{
       if(post.isLiked()){
@@ -149,8 +149,8 @@ function createCard(item){
 const popupAddPlace = new PopupWithForm({
   handleSubmitForm: (item) => {
     btnAddSave.textContent='Сохранение...';
-    const place1 = api.addPlace(item);
-    place1
+    api
+      .addPlace(item)
       .then((data) => {
         const postCard = createCard(data);
         cardList.addItem(postCard);
