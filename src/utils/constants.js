@@ -36,6 +36,7 @@ const sectionSelector = '.places';
 const popupPlace = '#popup-add';
 const popupImage ='#popup-image';
 const avatar = '.profile__avatar';
+const avatarFoto= '.profile__foto-avatar';
 const formAvatar = document.querySelector('#popup-form-avatar');
 const btnEditSave= document.querySelector('#btn-edit-save');
 const btnAddSave =document.querySelector('#btn-add-save');
@@ -57,6 +58,7 @@ const btnDelSave =document.querySelector('#btn-delete-save');
     popupPlace,
     popupImage,
     avatar,
+    avatarFoto,
     formAvatar,
     btnEditSave,
     btnAddSave,

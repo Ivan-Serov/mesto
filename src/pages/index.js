@@ -12,6 +12,7 @@ import {
   popupPlace,
   popupImage,
   avatar,
+  avatarFoto,
   formAvatar,
   btnEditSave,
   btnAddSave,
@@ -30,7 +31,8 @@ import PopupDelete from '../components/PopupDelete.js';
 const editProfileFormValidate = new FormValidator(configValid, formEditProfile);
 const addPostFormValidate = new FormValidator(configValid, formAddCard);
 //////////////////
-const api = new Api('https://nomoreparties.co/v1/cohort-28');
+/* const api = new Api('https://nomoreparties.co/v1/cohort-28'); */
+const api = new Api('https://nomoreparties.co/v1/cohort-28', 'd0022a9e-a6be-4d9a-ab6e-3949875c7c34');
 let userId;
 
 Promise.all([api.getUserInfo(), api.getInitialCards()])
@@ -52,7 +54,7 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
     return [];
   });
 // ///////////////
-const userInfo = new UserInfo({profiletitle, profileSubtitle, avatar});
+const userInfo = new UserInfo({profiletitle, profileSubtitle}, avatarFoto);
 
 const popupEditProfile = new PopupWithForm({
   handleSubmitForm: (item) => {
@@ -111,41 +113,34 @@ function createCard(item){
     handleDelCard: (postElement, cardId, deleteCard) => {
       popupDelete.open(postElement, cardId, deleteCard);
     },
-    handleLikeClick: (likeBtn, cardId,/* . */ card) =>{
-      if(likeBtn.classList.contains('places__like_active')){
+    handleLikeClick: (likeBtn, cardId,card) =>{
+      if(post.isLiked()){
         api
           .deleteLike(cardId)
           .then((res)=>{
-            post.numberLikes(card, res.likes);
+            post.updateLikes(card, res.likes);
           })
           .catch((err) => {
             console.log(err);
-  
-            return [];
-          })
-          .then(()=>{
-            likeBtn.classList.toggle('places__like_active')
+
           });
       }
       else{
         api
           .addLike(cardId)
           .then((res) => {
-            post.numberLikes(card, res.likes);
+            post.updateLikes(card, res.likes);
           })
           .catch((err) => {
             console.log(err);
 
             return [];
-          })
-          .then(()=>{
-            likeBtn.classList.toggle('places__like_active')
           });
       }
     }
   }, templateSelector);
   const postElement = post.generatePost();
-  //post.numberLikes(item, res.like);
+  //post.updateLikes(item, res.like);
   //cardList.addItem(postElement);
   return postElement;
 

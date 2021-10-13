@@ -1,7 +1,8 @@
 export default class Api {
-  constructor(url) {
+  constructor(url, token) {
     this._url = url;
-    this._authorizationToken = 'd0022a9e-a6be-4d9a-ab6e-3949875c7c34';
+    this._authorizationToken = token;
+    this._headers ={authorization:this._authorizationToken, 'Content-Type': 'application/json'};
   }
   getUserInfo() {
     return fetch(this._url +'/users/me', {
@@ -21,10 +22,7 @@ export default class Api {
   editProfile(data){
     return fetch(this._url +'/users/me', {
         method: 'PATCH',
-        headers: {
-          authorization: this._authorizationToken,
-          'Content-Type': 'application/json'
-        },
+        headers: this._headers,
         body: JSON.stringify(data)
       })
     .then(this.checkResult);
@@ -32,10 +30,7 @@ export default class Api {
   addPlace(data){
     return fetch(this._url +'/cards', {
       method: 'POST',
-      headers: {
-        authorization: this._authorizationToken,
-        'Content-Type': 'application/json'
-      },
+      headers: this._headers,
       body: JSON.stringify(data)
     })
     .then(this.checkResult);
@@ -43,40 +38,28 @@ export default class Api {
   deletePost(cardId) {
     return fetch(this._url + '/cards/' + cardId, {
       method: 'DELETE',
-      headers: {
-        authorization: this._authorizationToken,
-        'Content-Type': 'application/json'
-      },
+      headers: this._headers,
     })
     .then(this.checkResult);
   }
   addLike(cardId){
     return fetch(this._url + '/cards/likes/' + cardId, {
       method: 'PUT',
-      headers: {
-        authorization: this._authorizationToken,
-        'Content-Type': 'application/json'
-      },
+      headers: this._headers,
     })
     .then(this.checkResult);
   }
   deleteLike(cardId){
     return fetch(this._url + '/cards/likes/' + cardId, {
       method: 'DELETE',
-      headers: {
-        authorization: this._authorizationToken,
-        'Content-Type': 'application/json'
-      },
+      headers: this._headers,
     })
     .then(this.checkResult);
   }
   addAvatar(avatar){
     return fetch(this._url +'/users/me/avatar', {
       method: 'PATCH',
-      headers: {
-        authorization: this._authorizationToken,
-        'Content-Type': 'application/json'
-      },
+      headers: this._headers,
       body: JSON.stringify(avatar)
     })
     .then(this.checkResult);
